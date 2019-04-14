@@ -1,0 +1,21 @@
+{% extends "news/layout.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  Register
+{% endblock %}
+
+{% block body %}
+  <center>
+    <h3>Your Address</h3>
+    <hr>
+    <div class="col-5">
+      <form action="." method="post">
+        {% csrf_token %}
+        {{ address_form|crispy }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </center>
+  <br>
+{% endblock %}

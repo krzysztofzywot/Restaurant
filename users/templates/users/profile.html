@@ -1,0 +1,12 @@
+{% extends "news/layout.html" %}
+
+{% block title %}
+  {{ user.username }}'s Profile
+{% endblock %}
+
+{% block body %}
+  <h3>{{ user.username }}</h3>
+  Email: {{ user.email }}<br>
+  First name: {{ user.first_name }}<br>
+  Last name: {{ user.last_name }}
+{% endblock %}

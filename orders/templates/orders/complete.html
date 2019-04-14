@@ -1,0 +1,12 @@
+{% extends "news/layout.html" %}
+{% load static %}
+
+{% block title %}
+  Order Completed
+{% endblock %}
+
+{% block body %}
+  <center>
+  <h3>You have successfully completed an order.</h3><br>
+  <p>To view your order status go to the <a href="{% url 'my_orders' %}">my orders page.</a></p>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "news/layout.html" %}
+{% load static %}
+
+{% block title %}
+  {{ post.title }}
+{% endblock %}
+
+{% block body %}
+  <div class="post">
+      <h4>{{ post.title }}</h4>
+      by <b>{{ post.author }}</b> on <b>{{ post.date }}</b>
+      <br><br>
+      {{ post.content }}
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{% static 'products/cart.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,145 @@
+{% extends "news/layout.html" %}
+{% load static %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'products/style.css' %}"/>
+{% endblock %}
+
+{% block title %}
+  Menu
+{% endblock %}
+
+{% block body %}
+  <h1>Menu</h1>
+
+    <h3><i>Pizzas</i></h3>
+    {% for pizza in pizzas %}
+    <h4>{{ pizza.type }}</h4>
+    <div class="table-responsive">
+      <table class="table">
+        <tr>
+          <th></th>
+          <th>Small</th>
+          <th>Large</th>
+        </tr>
+        <tr>
+          <td>Cheese</td>
+          <td>
+            <span class="addToBasket" data-type="pizza" data-size="Small" data-name="cheese"
+             data-price="{{ pizza.price_small_with_cheese }}" data-id="{{ pizza.id }}">{{ pizza.price_small_with_cheese }}</span>
+          </td>
+          <td><span class="addToBasket" data-type="pizza" data-size="Large" data-name="cheese"
+             data-price="{{ pizza.price_large_with_cheese }}" data-id="{{ pizza.id }}">{{ pizza.price_large_with_cheese }}</span></td>
+        </tr>
+        <tr>
+          <td>1 topping</td>
+          <td><span class="addToBasket" data-type="pizza" data-size="Small" data-name="topping1"
+             data-price="{{ pizza.price_small_with_one_topping }}" data-id="{{ pizza.id }}">{{ pizza.price_small_with_one_topping }}</span></td>
+          <td><span class="addToBasket" data-type="pizza" data-size="Large" data-name="topping1"
+             data-price="{{ pizza.price_large_with_one_topping }}" data-id="{{ pizza.id }}">{{ pizza.price_large_with_one_topping }}</span></td>
+        </tr>
+        <tr>
+          <td>2 toppings</td>
+          <td><span class="addToBasket" data-type="pizza" data-size="Small" data-name="topping2"
+             data-price="{{ pizza.price_small_with_two_toppings }}" data-id="{{ pizza.id }}">{{ pizza.price_small_with_two_toppings }}</span></td>
+          <td><span class="addToBasket" data-type="pizza" data-size="Large" data-name="topping2"
+             data-price="{{ pizza.price_large_with_two_toppings }}" data-id="{{ pizza.id }}">{{ pizza.price_large_with_two_toppings }}</span></td>
+        </tr>
+        <tr>
+          <td>3 toppings</td>
+          <td><span class="addToBasket" data-type="pizza" data-size="Small" data-name="topping3"
+             data-price="{{ pizza.price_small_with_three_toppings }}" data-id="{{ pizza.id }}">{{ pizza.price_small_with_three_toppings }}</span></td>
+          <td><span class="addToBasket" data-type="pizza" data-size="Large" data-name="topping3"
+             data-price="{{ pizza.price_large_with_three_toppings }}" data-id="{{ pizza.id }}">{{ pizza.price_large_with_three_toppings }}</span></td>
+        </tr>
+      </table>
+    </div>
+    {% endfor %}
+    <br><br>
+
+    <h3><i>Toppings</i></h3>
+    <hr>
+    <ul>
+    {% for topping in toppings %}
+      <li>{{ topping }}</li>
+    {% endfor %}
+    </ul>
+    <br>
+
+
+    <h3><i>Subs</i></h3>
+    <div class="table-responsive">
+      <table class="table">
+        <tr>
+          <th></th>
+          <th>Small</th>
+          <th>Large</th>
+        </tr>
+      {% for sub in subs %}
+        <tr>
+          <td>{{ sub.name }}</td>
+          <td><span class="addToBasket" data-type="sub" data-size="Small" data-name="{{ sub.name }}"
+             data-price="{{ sub.price_small }}" data-id="{{ sub.id }}">{{ sub.price_small|default_if_none:"" }}</span></td>
+          <td><span class="addToBasket" data-type="sub" data-size="Large" data-name="{{ sub.name }}"
+             data-price="{{ sub.price_large }}" data-id="{{ sub.id }}">{{ sub.price_large|default_if_none:"" }}</span></td>
+        </tr>
+      {% endfor %}
+      </table>
+    </div>
+    <br><br>
+
+    <h3><i>Pasta</i></h3>
+    <div class="table-responsive">
+      <table class="table">
+      {% for pasta in pastas %}
+        <tr>
+          <td>{{ pasta.name }}</td>
+          <td><span class="addToBasket" data-type="pasta" data-size="" data-name="{{ pasta.name }}"
+            data-price="{{ pasta.price}}" data-id="{{ pasta.id }}">{{ pasta.price }}</span></td>
+        </tr>
+      {% endfor %}
+      </table>
+    </div>
+    <br><br>
+
+
+    <h3><i>Salads</i></h3>
+    <div class="table-responsive">
+      <table class="table">
+      {% for salad in salads %}
+        <tr>
+          <td>{{ salad.name }}</td>
+          <td><span class="addToBasket" data-type="salad" data-size="" data-name="{{ salad.name }}"
+            data-price="{{ salad.price}}" data-id="{{ salad.id }}">{{ salad.price }}</span></td>
+        </tr>
+      {% endfor %}
+      </table>
+    </div>
+    <br><br>
+
+
+    <h3><i>Dinner Platters</i></h3>
+    <div class="table-responsive">
+      <table class="table">
+        <tr>
+          <th></th>
+          <th>Small</th>
+          <th>Large</th>
+        </tr>
+      {% for platter in dinnerPlatters %}
+        <tr>
+          <td>{{ platter.name }}</td>
+          <td><span class="addToBasket" data-type="dinnerPlatter" data-size="Small" data-name="{{ platter.name }}"
+            data-price="{{ platter.price_small }}" data-id="{{ platter.id }}">{{ platter.price_small }}</td>
+          <td><span class="addToBasket" data-type="dinnerPlatter" data-size="Large" data-name="{{ platter.name }}"
+            data-price="{{ platter.price_large }}" data-id="{{ platter.id }}">{{ platter.price_large }}</td>
+        </tr>
+      {% endfor %}
+      </table>
+    </div>
+    <br>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{% static 'products/cart.js' %}"></script>
+{% endblock %}

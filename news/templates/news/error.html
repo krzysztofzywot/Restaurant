@@ -1,0 +1,14 @@
+{% extends "news/layout.html" %}
+{% load static %}
+
+{% block title %}
+  Error
+{% endblock %}
+
+{% block body %}
+  <h4>{{ error_message }}</h4>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{% static 'products/cart.js' %}"></script>
+{% endblock %}

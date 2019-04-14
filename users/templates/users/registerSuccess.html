@@ -1,0 +1,17 @@
+{% extends "news/layout.html" %}
+{% load static %}
+
+{% block title %}
+  Registration succeeded
+{% endblock %}
+
+{% block body %}
+  <center><h5>You have been successfully registered, {{ request.user }}!<br>
+    You will be automatically redirected to the main page in <span id="countdown">5</span> seconds.</h5>
+    <br><br>
+    If you are not redirected automatically <a href="{% url 'index' %}">click here</a>.</center>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{% static 'users/redirect.js' %}"></script>
+{% endblock %}

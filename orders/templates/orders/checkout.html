@@ -1,0 +1,134 @@
+{% extends "news/layout.html" %}
+{% load static %}
+
+{% block title %}
+  Checkout
+{% endblock %}
+
+{% block css %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.7/dist/css/bootstrap-select.min.css">
+{% endblock %}
+
+{% block body %}
+  <h3>Order Information</h3>
+  <hr>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-danger" role="alert">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  {% if pizzas %}
+  <h5><i>Pizzas:</i></h5>
+  <ol>
+    {% for pizza in pizzas %}
+        <li>
+          Type: {{ pizza.type }}<br>
+          Size: {{ pizza.size }}<br>
+          Toppings number: {{ pizza.toppings_number }}<br>
+          Toppings:
+          <ul id="toppings{{ pizza.id }}">
+            <li>Cheese</li>
+            {% for topping in pizza.toppings.all %}
+             <li>{{ topping.name }}</li>
+            {% endfor %}
+          </ul>
+          Price: {{ pizza.price }}
+
+          {% if pizza.toppings.count == 0 %}
+            <div id="toppingSelection{{ pizza.id }}">
+              {% if pizza.toppings_number > 0 %}
+                <small><i>Select toppings:</i></small><br>
+                <form action="." method="POST">
+                  <select class="selectpicker" id="toppingsSelected" multiple data-live-search="true" data-max-options="{{ pizza.toppings_number }}" data-width="fit">
+                    {% for topping in toppings %}
+                      <option value="{{ topping.id }}" data-name="{{ topping.name }}">{{ topping.name }}</option>
+                    {% endfor %}
+                  </select>
+                  <br><br>
+                  <button type="button" data-pizza_id="{{ pizza.id }}" class="submitTopping btn btn-primary">Submit</button>
+                </form>
+              {% endif %}
+            </div>
+          {% endif %}
+
+        </li>
+      {% endfor %}
+    </ol>
+  {% endif %}
+
+
+  {% if subs %}
+    <h5><i>Subs</i></h5>
+    <ol>
+      {% for sub in subs %}
+        <li>
+          Name: {{ sub.name }}<br>
+          Price: {{ sub.price }}
+        </li>
+      {% endfor %}
+    </ol>
+  {% endif %}
+
+
+  {% if pastas %}
+  <h5>Pastas</h5>
+    <ol>
+      {% for pasta in pastas %}
+        <li>
+          Name: {{ pasta.name }}<br>
+          Price: {{ pasta.price }}
+        </li>
+      {% endfor %}
+    </ol>
+  {% endif %}
+
+
+  {% if salads %}
+    <h5>Salads</h5>
+    <ol>
+      {% for salad in salads %}
+        <li>
+          Name: {{ salad.name }}<br>
+          Price: {{ salad.price }}
+        </li>
+      {% endfor %}
+    </ol>
+  {% endif %}
+
+
+  {% if dinner_platters %}
+    <h5>Dinner Platters</h5>
+    <ol>
+      {% for dinner_platter in dinner_platters %}
+        <li>
+          Name: {{ dinner_platter.name }}<br>
+          Price: {{ dinner_platter.price }}
+        </li>
+      {% endfor %}
+    </ol>
+  {% endif %}
+
+  <br>
+  <b>Total price: {{ total_price }}</b>
+
+  {% if not user.profile.address %}
+    <br><br>
+    <a href="{% url 'add_address' %}">Add address</a>
+  {% else %}
+    <br><br>
+    Your address:<br>
+    {{ user.profile.address }}<br>
+    <a href="{% url 'complete' %}">Finish Order</a>
+  {% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.7/dist/js/bootstrap-select.min.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.7/dist/js/i18n/defaults-*.min.js"></script> -->
+  <script src="{% static 'orders/add_toppings.js' %}"></script>
+{% endblock %}
